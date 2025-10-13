@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: worker-application
+  cloud:
+    aws:
+      region:
+        static: ap-northeast-1
+      credentials:
+        access-key: test
+        secret-key: test
+      sqs:
+        endpoint: http://localhost:4566
+  main:
+    banner-mode: console
+
+aws:
+  region: ap-northeast-1
+  access-key-id: test
+  secret-access-key: test
+  sqs:
+    endpoint: http://localhost:4566
+    queue-name: worker-queue
+
+logging:
+  level:
+    root: INFO
+    com.example.worker: INFO
+    io.awspring.cloud.sqs: INFO
+    software.amazon.awssdk: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg%n"
