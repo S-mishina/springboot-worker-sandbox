@@ -2,5 +2,64 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "separateMinorPatch": true,
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0,
+  "packageRules": [
+    {
+      "matchPackagePrefixes": [
+        "org.springframework.boot",
+        "io.spring.dependency-management"
+      ],
+      "groupName": "spring-boot"
+    },
+    {
+      "matchPackagePrefixes": [
+        "io.awspring.cloud"
+      ],
+      "groupName": "spring-cloud-aws"
+    },
+    {
+      "matchManagers": [
+        "gradle-wrapper"
+      ],
+      "groupName": "gradle"
+    },
+    {
+      "matchPackageNames": [
+        "S-mishina/reusable-workflows"
+      ],
+      "groupName": "reusable-workflows"
+    },
+    {
+      "matchDepNames": [
+        "eclipse-temurin"
+      ],
+      "groupName": "java-runtime"
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "build\\.gradle$"
+      ],
+      "matchStrings": [
+        "languageVersion = JavaLanguageVersion\\.of\\((?<currentValue>\\d+)\\)"
+      ],
+      "datasourceTemplate": "java-version",
+      "depNameTemplate": "eclipse-temurin"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "Dockerfile$"
+      ],
+      "matchStrings": [
+        "FROM (?<depName>eclipse-temurin):(?<currentValue>\\d+)-(?:jdk|jre)"
+      ],
+      "datasourceTemplate": "docker"
+    }
   ]
 }
