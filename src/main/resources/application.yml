@@ -18,12 +18,14 @@ spring:
     banner-mode: console
 
 aws:
-  region: ap-northeast-1
-  access-key-id: test
-  secret-access-key: test
+  region: ${AWS_REGION:ap-northeast-1}
+  access-key-id: ${AWS_ACCESS_KEY_ID:test}
+  secret-access-key: ${AWS_SECRET_ACCESS_KEY:test}
   sqs:
-    endpoint: http://localhost:4566
-    queue-name: worker-queue
+    endpoint: ${AWS_SQS_ENDPOINT:http://localhost:4566}
+    queue-name: ${AWS_SQS_QUEUE_NAME:worker-queue}
+    consumer:
+      enabled: ${AWS_SQS_CONSUMER_ENABLED:true}
 
 logging:
   level:

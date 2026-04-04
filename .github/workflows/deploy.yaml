@@ -1,0 +1,15 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    permissions:
+      contents: read
+      packages: write
+    uses: S-mishina/reusable-workflows/.github/workflows/docker-build-push.yml@main
+    with:
+      image-name: s-mishina/springboot-worker-sandbox

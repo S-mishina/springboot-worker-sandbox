@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  test:
+    uses: S-mishina/reusable-workflows/.github/workflows/gradle-test.yml@main
+
+  auto-bot:
+    needs: [test]
+    if: |
+      !cancelled() &&
+      needs.test.result == 'success'
+    uses: S-mishina/reusable-workflows/.github/workflows/pr-auto-bot.yml@main
+    permissions:
+      contents: write
+      pull-requests: write
