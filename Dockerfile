@@ -1,5 +1,5 @@
 # --- Build Stage ---
-FROM eclipse-temurin:25.0.2_10-jdk AS build
+FROM eclipse-temurin:25.0.4_7-jdk AS build
 WORKDIR /app
 
 # Copy the entire gradle directory (including wrapper JAR and properties)
@@ -18,7 +18,7 @@ COPY src src
 RUN ./gradlew bootJar --no-daemon
 
 # --- Runtime Stage ---
-FROM eclipse-temurin:25.0.2_10-jre
+FROM eclipse-temurin:25.0.4_7-jre
 WORKDIR /app
 
 # Create a non-root user for security
